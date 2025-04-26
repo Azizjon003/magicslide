@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="uz" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,137 +8,440 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
       rel="stylesheet"
     />
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+      defer
+    ></script>
     <style>
       .gradient {
-        background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+        background: linear-gradient(90deg, #4f46e5 0%, #a78bfa 100%);
+      }
+      /* Add smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+      /* Simple fade-in animation */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .fade-in {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+      /* Add subtle hover effect to nav links */
+      nav a:hover {
+        transform: translateY(-2px);
+        transition: transform 0.2s ease-in-out;
       }
     </style>
   </head>
-  <body class="font-sans">
+  <body class="font-sans antialiased text-gray-800">
     <!-- Header -->
-    <header class="gradient text-white">
-      <div class="container mx-auto px-6 py-8">
+    <header
+      class="gradient text-white shadow-md sticky top-0 z-50"
+      x-data="{ isOpen: false }"
+    >
+      <div class="container mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
-          <div class="text-2xl font-bold">MagicSlide</div>
+          <div class="text-3xl font-bold">MagicSlide</div>
+          <!-- Desktop Nav -->
+          <nav class="hidden md:flex space-x-6 items-center">
+            <a
+              href="#afzalliklar"
+              class="hover:text-indigo-200 transition duration-300"
+              >Afzalliklar</a
+            >
+            <a
+              href="#imkoniyatlar"
+              class="hover:text-indigo-200 transition duration-300"
+              >Imkoniyatlar</a
+            >
+            <a
+              href="#qanday-ishlaydi"
+              class="hover:text-indigo-200 transition duration-300"
+              >Qanday ishlaydi?</a
+            >
+            <a
+              href="#narxlar"
+              class="hover:text-indigo-200 transition duration-300"
+              >Narxlar</a
+            >
+            <a
+              href="https://t.me/Magic_slides_bot"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-white text-indigo-600 px-5 py-2 rounded-full font-semibold hover:bg-indigo-100 transition duration-300 transform hover:scale-105"
+            >
+              Botga o'tish
+            </a>
+          </nav>
+          <!-- Mobile Menu Button -->
+          <div class="md:hidden">
+            <button
+              @click="isOpen = !isOpen"
+              class="text-white focus:outline-none"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <!-- Mobile Nav -->
+        <nav
+          :class="{'block': isOpen, 'hidden': !isOpen}"
+          class="md:hidden mt-4 space-y-2"
+        >
+          <a
+            href="#afzalliklar"
+            @click="isOpen = false"
+            class="block px-4 py-2 hover:bg-indigo-700 rounded transition duration-300"
+            >Afzalliklar</a
+          >
+          <a
+            href="#imkoniyatlar"
+            @click="isOpen = false"
+            class="block px-4 py-2 hover:bg-indigo-700 rounded transition duration-300"
+            >Imkoniyatlar</a
+          >
+          <a
+            href="#qanday-ishlaydi"
+            @click="isOpen = false"
+            class="block px-4 py-2 hover:bg-indigo-700 rounded transition duration-300"
+            >Qanday ishlaydi?</a
+          >
+          <a
+            href="#narxlar"
+            @click="isOpen = false"
+            class="block px-4 py-2 hover:bg-indigo-700 rounded transition duration-300"
+            >Narxlar</a
+          >
           <a
             href="https://t.me/Magic_slides_bot"
-            class="bg-white text-blue-600 px-6 py-2 rounded-full font-semibold hover:bg-blue-100 transition duration-300"
+            target="_blank"
+            rel="noopener noreferrer"
+            @click="isOpen = false"
+            class="block w-full text-center bg-white text-indigo-600 px-5 py-2 rounded-full font-semibold hover:bg-indigo-100 transition duration-300 mt-2"
           >
             Botga o'tish
           </a>
-        </div>
-        <div class="text-center mt-24 mb-16">
-          <h1 class="text-5xl font-bold mb-6">
-            Telegram orqali ajoyib slaydlar yarating
-          </h1>
-          <p class="text-xl mb-8">
-            Professional slaydlarni oson va tez tayyorlashning eng yaxshi usuli
-          </p>
-          <a
-            href="https://t.me/Magic_slides_bot"
-            class="bg-white text-blue-600 px-8 py-3 rounded-full font-bold text-lg hover:bg-blue-100 transition duration-300"
-          >
-            Boshlash
-          </a>
-        </div>
+        </nav>
       </div>
     </header>
 
+    <!-- Hero Section -->
+    <section class="gradient text-white pt-24 pb-32">
+      <div class="container mx-auto px-6 text-center fade-in">
+        <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">
+          Telegram orqali
+          <span class="block md:inline">ajoyib slaydlar yarating</span>
+        </h1>
+        <p class="text-xl md:text-2xl mb-10 text-indigo-100">
+          Professional slaydlarni oson va tez tayyorlashning eng innovatsion
+          usuli
+        </p>
+        <a
+          href="#afzalliklar"
+          class="bg-white text-indigo-600 px-10 py-4 rounded-full font-bold text-lg hover:bg-indigo-100 transition duration-300 transform hover:scale-105 inline-block shadow-lg"
+        >
+          Ko'proq bilish
+        </a>
+        <a
+          href="https://t.me/Magic_slides_bot"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ml-4 border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-indigo-600 transition duration-300 transform hover:scale-105 inline-block shadow-lg"
+        >
+          Botni sinash
+        </a>
+      </div>
+    </section>
+
     <!-- Afzalliklar -->
-    <section class="py-20" id="boshlash">
+    <section class="py-24 bg-gray-50" id="afzalliklar">
       <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-bold text-center mb-16">
+        <h2 class="text-4xl font-bold text-center mb-20 text-gray-800">
           Nima uchun MagicSlide?
         </h2>
-        <div class="grid md:grid-cols-3 gap-12">
-          <div class="text-center">
+        <div class="grid md:grid-cols-3 gap-10">
+          <!-- Card 1: Tezkor -->
+          <div
+            class="bg-white p-8 rounded-xl shadow-lg text-center transform transition duration-500 hover:scale-105 fade-in"
+            style="animation-delay: 0.1s"
+          >
             <div
-              class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+              class="bg-indigo-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 border-4 border-indigo-200"
             >
               <svg
-                class="w-8 h-8 text-purple-600"
+                class="w-10 h-10 text-indigo-600"
+                xmlns="http://www.w3.org/2000/svg"
                 fill="none"
-                stroke="currentColor"
                 viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
               >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                 />
               </svg>
             </div>
-            <h3 class="text-xl font-semibold mb-4">Tezkor</h3>
-            <p>5 daqiqa ichida professional slaydlar</p>
+            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Tezkor</h3>
+            <p class="text-gray-600">
+              5 daqiqa ichida professional slaydlar tayyorlang.
+            </p>
           </div>
-          <div class="text-center">
+          <!-- Card 2: Chiroyli Dizayn -->
+          <div
+            class="bg-white p-8 rounded-xl shadow-lg text-center transform transition duration-500 hover:scale-105 fade-in"
+            style="animation-delay: 0.2s"
+          >
             <div
-              class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+              class="bg-indigo-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 border-4 border-indigo-200"
             >
               <svg
-                class="w-8 h-8 text-purple-600"
+                class="w-10 h-10 text-indigo-600"
+                xmlns="http://www.w3.org/2000/svg"
                 fill="none"
-                stroke="currentColor"
                 viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
               >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                  d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42"
                 />
               </svg>
             </div>
-            <h3 class="text-xl font-semibold mb-4">Chiroyli dizayn</h3>
-            <p>20+ professional dizayn shablonlari</p>
+            <h3 class="text-2xl font-semibold mb-4 text-gray-800">
+              Chiroyli dizayn
+            </h3>
+            <p class="text-gray-600">
+              20+ zamonaviy va professional dizayn shablonlari.
+            </p>
           </div>
-          <div class="text-center">
+          <!-- Card 3: Oson -->
+          <div
+            class="bg-white p-8 rounded-xl shadow-lg text-center transform transition duration-500 hover:scale-105 fade-in"
+            style="animation-delay: 0.3s"
+          >
             <div
-              class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+              class="bg-indigo-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 border-4 border-indigo-200"
             >
               <svg
-                class="w-8 h-8 text-purple-600"
+                class="w-10 h-10 text-indigo-600"
+                xmlns="http://www.w3.org/2000/svg"
                 fill="none"
-                stroke="currentColor"
                 viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
               >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                  d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"
                 />
               </svg>
             </div>
-            <h3 class="text-xl font-semibold mb-4">Oson</h3>
-            <p>Telegram bot orqali oddiy xabarlar bilan boshqaring</p>
+            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Oson</h3>
+            <p class="text-gray-600">
+              Telegram bot orqali oddiy ko'rsatmalar bilan boshqaring.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Xususiyatlar -->
-    <section class="bg-gray-100 py-20">
+    <!-- Imkoniyatlar -->
+    <section class="py-24 bg-white" id="imkoniyatlar">
       <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-bold text-center mb-16">Imkoniyatlar</h2>
-        <div class="grid md:grid-cols-2 gap-12">
-          <div class="bg-white p-8 rounded-lg shadow-lg">
-            <h3 class="text-xl font-semibold mb-4">✨ Slayd dizaynlari</h3>
-            <ul class="space-y-3">
-              <li>• Zamonaviy dizayn shablonlari</li>
-              <li>• Ranglar sxemalari</li>
-              <li>• Kasbiy ko'rinish</li>
-              <li>• Avtomatik matn joylashuvi</li>
+        <h2 class="text-4xl font-bold text-center mb-20 text-gray-800">
+          Imkoniyatlar
+        </h2>
+        <div class="grid md:grid-cols-2 gap-10">
+          <!-- Card 1: Slayd dizaynlari -->
+          <div
+            class="bg-gray-50 p-10 rounded-xl shadow-lg transform transition duration-500 hover:scale-105 fade-in"
+            style="animation-delay: 0.1s"
+          >
+            <h3
+              class="flex items-center text-2xl font-semibold mb-6 text-gray-800"
+            >
+              <svg
+                class="w-7 h-7 text-indigo-600 mr-3"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42"
+                />
+              </svg>
+              Slayd dizaynlari
+            </h3>
+            <ul class="space-y-4 text-gray-600">
+              <li class="flex items-center">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  /></svg
+                >Zamonaviy dizayn shablonlari
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  /></svg
+                >Ranglar sxemalari
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  /></svg
+                >Kasbiy ko'rinish
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  /></svg
+                >Avtomatik matn joylashuvi
+              </li>
             </ul>
           </div>
-          <div class="bg-white p-8 rounded-lg shadow-lg">
-            <h3 class="text-xl font-semibold mb-4">📊 Kontent turlari</h3>
-            <ul class="space-y-3">
-              <li>• Matnli slaydlar</li>
-              <li>• Rasmli slaydlar</li>
-              <li>• Ro'yxatli slaydlar</li>
-              <li>• Diagrammalar</li>
+          <!-- Card 2: Kontent turlari -->
+          <div
+            class="bg-gray-50 p-10 rounded-xl shadow-lg transform transition duration-500 hover:scale-105 fade-in"
+            style="animation-delay: 0.2s"
+          >
+            <h3
+              class="flex items-center text-2xl font-semibold mb-6 text-gray-800"
+            >
+              <svg
+                class="w-7 h-7 text-indigo-600 mr-3"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"
+                />
+              </svg>
+              Kontent turlari
+            </h3>
+            <ul class="space-y-4 text-gray-600">
+              <li class="flex items-center">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  /></svg
+                >Matnli slaydlar
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  /></svg
+                >Rasmli slaydlar
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  /></svg
+                >Ro'yxatli slaydlar
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  /></svg
+                >Diagrammalar
+              </li>
             </ul>
           </div>
         </div>
@@ -146,52 +449,106 @@
     </section>
 
     <!-- Qanday ishlaydi -->
-    <section class="py-20">
+    <section class="py-24 bg-gray-50" id="qanday-ishlaydi">
       <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-bold text-center mb-16">Qanday ishlaydi?</h2>
-        <div class="max-w-3xl mx-auto">
-          <div class="flex items-center mb-12">
+        <h2 class="text-4xl font-bold text-center mb-20 text-gray-800">
+          Qanday ishlaydi?
+        </h2>
+        <div class="relative max-w-2xl mx-auto">
+          <!-- Vertical line -->
+          <div
+            class="absolute left-6 top-0 h-full w-0.5 bg-indigo-200"
+            style="transform: translateX(-50%)"
+          ></div>
+
+          <!-- Step 1 -->
+          <div
+            class="mb-12 flex items-start fade-in"
+            style="animation-delay: 0.1s"
+          >
             <div
-              class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-6"
+              class="flex-shrink-0 w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-xl z-10 shadow-md border-4 border-gray-50"
             >
               1
             </div>
-            <div>
-              <h3 class="text-xl font-semibold mb-2">Botni ishga tushiring</h3>
-              <p>@Magic_slides_bot ga o'ting va /start buyrug'ini yuboring</p>
+            <div class="ml-8 bg-white p-6 rounded-lg shadow-md flex-grow">
+              <h3 class="text-xl font-semibold mb-2 text-gray-800">
+                Botni ishga tushiring
+              </h3>
+              <p class="text-gray-600">
+                <a
+                  href="https://t.me/Magic_slides_bot"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-indigo-600 hover:underline font-medium"
+                  >@Magic_slides_bot</a
+                >
+                ga o'ting va
+                <code class="bg-indigo-100 text-indigo-800 px-1 rounded"
+                  >/start</code
+                >
+                buyrug'ini yuboring.
+              </p>
             </div>
           </div>
-          <div class="flex items-center mb-12">
+
+          <!-- Step 2 -->
+          <div
+            class="mb-12 flex items-start fade-in"
+            style="animation-delay: 0.2s"
+          >
             <div
-              class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-6"
+              class="flex-shrink-0 w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-xl z-10 shadow-md border-4 border-gray-50"
             >
               2
             </div>
-            <div>
-              <h3 class="text-xl font-semibold mb-2">Dizayn tanlang</h3>
-              <p>Mavjud shablonlardan o'zingizga yoqqanini tanlang</p>
+            <div class="ml-8 bg-white p-6 rounded-lg shadow-md flex-grow">
+              <h3 class="text-xl font-semibold mb-2 text-gray-800">
+                Dizayn tanlang
+              </h3>
+              <p class="text-gray-600">
+                Mavjud 20+ professional shablonlardan o'zingizga yoqqanini
+                tanlang.
+              </p>
             </div>
           </div>
-          <div class="flex items-center mb-12">
+
+          <!-- Step 3 -->
+          <div
+            class="mb-12 flex items-start fade-in"
+            style="animation-delay: 0.3s"
+          >
             <div
-              class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-6"
+              class="flex-shrink-0 w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-xl z-10 shadow-md border-4 border-gray-50"
             >
               3
             </div>
-            <div>
-              <h3 class="text-xl font-semibold mb-2">Kontent kiriting</h3>
-              <p>Matn, ma'lumotlarni yuboring</p>
+            <div class="ml-8 bg-white p-6 rounded-lg shadow-md flex-grow">
+              <h3 class="text-xl font-semibold mb-2 text-gray-800">
+                Kontent kiriting
+              </h3>
+              <p class="text-gray-600">
+                Slaydlar uchun matn, ro'yxatlar yoki boshqa ma'lumotlarni botga
+                yuboring.
+              </p>
             </div>
           </div>
-          <div class="flex items-center">
+
+          <!-- Step 4 -->
+          <div class="flex items-start fade-in" style="animation-delay: 0.4s">
             <div
-              class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-6"
+              class="flex-shrink-0 w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-xl z-10 shadow-md border-4 border-gray-50"
             >
               4
             </div>
-            <div>
-              <h3 class="text-xl font-semibold mb-2">Tayyor!</h3>
-              <p>Slaydlaringizni PPTX formatida yuklab oling</p>
+            <div class="ml-8 bg-white p-6 rounded-lg shadow-md flex-grow">
+              <h3 class="text-xl font-semibold mb-2 text-gray-800">
+                Tayyor! ✨
+              </h3>
+              <p class="text-gray-600">
+                Bir necha soniyada tayyor slaidlaringizni PPTX formatida yuklab
+                oling.
+              </p>
             </div>
           </div>
         </div>
@@ -199,41 +556,207 @@
     </section>
 
     <!-- Narxlar -->
-    <section class="bg-gray-100 py-20">
+    <section class="py-24 bg-white" id="narxlar">
       <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-bold text-center mb-16">Narxlar</h2>
-        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-          <div class="bg-white rounded-lg p-8 text-center shadow-lg">
-            <h3 class="text-2xl font-bold mb-4">Start</h3>
-            <p class="text-4xl font-bold mb-6">Bepul</p>
-            <ul class="text-left mb-8 space-y-3">
-              <li>✓ 1 ta slayd</li>
-              <li>✓ Asosiy shablonlar</li>
-              <li>✓ PPTX yuklash</li>
-              <li>✓ Standart sifat</li>
+        <h2 class="text-4xl font-bold text-center mb-20 text-gray-800">
+          Tariflar
+        </h2>
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-stretch">
+          <!-- Card 1: Start (Bepul) -->
+          <div
+            class="border border-gray-200 rounded-xl p-8 flex flex-col transform transition duration-500 hover:scale-105 fade-in"
+            style="animation-delay: 0.1s"
+          >
+            <div class="text-center mb-8">
+              <h3 class="text-2xl font-semibold mb-3 text-gray-800">Start</h3>
+              <p class="text-5xl font-extrabold mb-2 text-indigo-600">Bepul</p>
+              <p class="text-gray-500">Tez boshlash uchun</p>
+            </div>
+            <ul class="space-y-4 text-gray-600 mb-10 flex-grow">
+              <li class="flex items-center">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                1 ta slayd yaratish
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Asosiy shablonlar
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                PPTX formatida yuklash
+              </li>
+              <li class="flex items-center text-gray-400">
+                <svg
+                  class="w-5 h-5 text-gray-400 mr-2 flex-shrink-0"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Premium shablonlar
+              </li>
+              <li class="flex items-center text-gray-400">
+                <svg
+                  class="w-5 h-5 text-gray-400 mr-2 flex-shrink-0"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Maxsus effektlar
+              </li>
             </ul>
             <a
               href="https://t.me/Magic_slides_bot"
-              class="block w-full bg-blue-600 text-white py-3 rounded-full font-semibold hover:bg-blue-700 transition duration-300"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block w-full bg-indigo-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300 shadow-md mt-auto"
             >
-              Boshlash
+              Bepul boshlash
             </a>
           </div>
-          <div class="gradient rounded-lg p-8 text-center text-white shadow-lg">
-            <h3 class="text-2xl font-bold mb-4">Premium</h3>
-            <p class="text-4xl font-bold mb-6">
-              2000 <span class="text-base font-normal">so'm/dona</span>
-            </p>
-            <ul class="text-left mb-8 space-y-3">
-              <li>✓ Cheksiz slaydlar</li>
-              <li>✓ Premium shablonlar</li>
-              <li>✓ PowerPoint export</li>
-              <li>✓ Maxsus effektlar</li>
-              <li>✓ 24/7 qo'llab-quvvatlash</li>
+
+          <!-- Card 2: Premium -->
+          <div
+            class="gradient rounded-xl p-8 flex flex-col text-white ring-4 ring-indigo-300 ring-offset-2 transform transition duration-500 hover:scale-105 fade-in shadow-2xl"
+            style="animation-delay: 0.2s"
+          >
+            <div class="text-center mb-8">
+              <span
+                class="inline-block bg-white text-indigo-600 text-xs font-bold px-3 py-1 rounded-full mb-3 uppercase tracking-wider"
+                >Eng Ommabop</span
+              >
+              <h3 class="text-2xl font-semibold mb-3">Premium</h3>
+              <p class="text-5xl font-extrabold mb-2">
+                2000 <span class="text-xl font-normal">so'm</span>
+              </p>
+              <p class="text-indigo-100">Har bir yaratilgan slayd uchun</p>
+            </div>
+            <ul class="space-y-4 mb-10 flex-grow">
+              <li class="flex items-center">
+                <svg
+                  class="w-5 h-5 text-green-300 mr-2 flex-shrink-0"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Cheksiz slayd yaratish
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-5 h-5 text-green-300 mr-2 flex-shrink-0"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Barcha Premium shablonlar
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-5 h-5 text-green-300 mr-2 flex-shrink-0"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                PowerPoint (.pptx) export
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-5 h-5 text-green-300 mr-2 flex-shrink-0"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Maxsus animatsiyalar va effektlar
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-5 h-5 text-green-300 mr-2 flex-shrink-0"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                24/7 Premium qo'llab-quvvatlash
+              </li>
             </ul>
             <a
               href="https://t.me/Magic_slides_bot"
-              class="block w-full bg-white text-blue-600 py-3 rounded-full font-semibold hover:bg-blue-100 transition duration-300"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block w-full bg-white text-indigo-600 text-center py-3 rounded-lg font-semibold hover:bg-indigo-100 transition duration-300 shadow-md mt-auto"
             >
               Premium olish
             </a>
@@ -243,7 +766,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="gradient text-white py-12">
+    <footer class="gradient text-white py-12 mt-10">
       <div class="container mx-auto px-6 text-center">
         <p class="mb-4">
           Yordam kerakmi?
